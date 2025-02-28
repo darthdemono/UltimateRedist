@@ -23,7 +23,9 @@ UltimateRedist is a PowerShell-based solution that automates the installation of
 
 ## Installs:
 
-### VC++ Redistributables
+### Visual C++ Redistributables
+Package of Microsoft C and C++ runtime libraries required for applications built with Visual Studio.
+
 - **VC++ Redistributables 2005 (x86/x64)**
 - **VC++ Redistributables 2008 (x86/x64)**
 - **VC++ Redistributables 2010 (x86/x64)**
@@ -36,6 +38,8 @@ UltimateRedist is a PowerShell-based solution that automates the installation of
 - **Visual Basic Runtimes**
 
 ### .NET and ASP.NET Runtimes/SDKs
+Framework and web libraries needed to run .NET and ASP.NET applications.
+
 - **.NET 5**
 - **.NET 6**
 - **.NET 7**
@@ -45,15 +49,24 @@ UltimateRedist is a PowerShell-based solution that automates the installation of
 - **ASP.NET 7**
 - **ASP.NET Preview**
 
-### Additional Components
-- **DirectX**
-- **XNA Framework**
+### NVIDIA PhysX
+Physics engine libraries that power realistic in-game physics simulations.
 - **NVIDIA PhysX**
 - **NVIDIA PhysX Legacy**
-- **Oracle Java Runtime**
-- **Visual J# Redistributable**
-- **SQL Server Compact Edition (SSCE) Runtime**
-- **OpenAL**
+
+### Additional Runtimes/Redistributables
+#### DirectX
+A collection of multimedia APIs designed for handling graphics, video, and game programming.
+#### XNA Framework
+Legacy game development framework for Windows and Xbox applications.
+#### Oracle Java Runtime
+Environment required to run applications developed in Java.
+#### Visual J# Redistributable
+Runtime components for running applications developed with Visual J#, targeting the .NET Framework.
+#### SQL Server Compact Edition (SSCE) Runtime
+Lightweight, embedded database engine for local data storage in legacy and small-scale applications.
+#### OpenAL
+Cross-platform audio API for rendering multichannel 3D audio.
 
 ---
 
@@ -71,7 +84,7 @@ This project aims to cover every essential runtime without the need to manually 
 
 ## Special Thanks
 
-- **abbodi1406:** Thanks to his VCredist AIO project, I didn’t have to manually add every Visual C++ redistributable. His work has been instrumental in making UltimateRedist universal for all Windows runtimes.
+- **[abbodi1406](https://github.com/abbodi1406/):** Thanks to his [VCredist AIO project](https://github.com/abbodi1406/vcredist), I didn’t have to manually add every Visual C++ redistributable. His work has been instrumental in making UltimateRedist universal for all Windows runtimes.
 
 ---
 
