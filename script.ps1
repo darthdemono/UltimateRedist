@@ -1,23 +1,58 @@
 $progressPreference = 'silentlyContinue'
 
-# --- Installing Winget ---
+# --- Installing Winget Dependencies ---
 Write-Host "Installing Winget Dependencies..."
 $depUrl = "https://github.com/microsoft/winget-cli/releases/download/v1.10.320/DesktopAppInstaller_Dependencies.zip"
 $depZip = "$env:TEMP\DesktopAppInstaller_Dependencies.zip"
 Invoke-WebRequest -Uri $depUrl -OutFile $depZip
 $depFolder = "$env:TEMP\DesktopAppInstaller_Dependencies"
 Expand-Archive -Path $depZip -DestinationPath $depFolder -Force
-Write-Host "Installing Winget Dependencies..."
-$uiXaml = Join-Path $depFolder "x64\Microsoft.UI.Xaml.2.8_8.2501.31001.0_x64.appx"
-$vcLibs = Join-Path $depFolder "x64\Microsoft.VCLibs.140.00.UWPDesktop_14.0.33728.0_x64.appx"
-Add-AppxPackage -Path $uiXaml
-Add-AppxPackage -Path $vcLibs
 
-Write-Host "Instatlling Winget..."
+# Determine system architecture and set variables accordingly
+if ([Environment]::Is64BitOperatingSystem) {
+    $ssceUrl = "https://download.microsoft.com/download/f/f/d/ffdf76e3-9e55-41da-a750-1798b971936c/ENU/SSCERuntime_x64-ENU.exe"
+    $uiXaml = Join-Path $depFolder "x64\Microsoft.UI.Xaml.2.8_8.2501.31001.0_x64.appx"
+    $vcLibs = Join-Path $depFolder "x64\Microsoft.VCLibs.140.00.UWPDesktop_14.0.33728.0_x64.appx"
+} else {
+    $ssceUrl = "https://download.microsoft.com/download/f/f/d/ffdf76e3-9e55-41da-a750-1798b971936c/ENU/SSCERuntime_x32-ENU.exe"
+    $uiXaml = Join-Path $depFolder "x86\Microsoft.UI.Xaml.2.8_8.2501.31001.0_x86.appx"
+    $vcLibs = Join-Path $depFolder "x86\Microsoft.VCLibs.140.00.UWPDesktop_14.0.33728.0_x86.appx"
+}
+
+try {
+    Add-AppxPackage -Path $uiXaml -ErrorAction Stop
+} catch {
+    if ($_.Exception.Message -match "0x80073D02") {
+        Write-Host "Microsoft.UI.Xaml dependency already installed, skipping."
+    } else {
+        throw $_
+    }
+}
+
+try {
+    Add-AppxPackage -Path $vcLibs -ErrorAction Stop
+} catch {
+    if ($_.Exception.Message -match "0x80073D02") {
+        Write-Host "Microsoft.VCLibs dependency already installed, skipping."
+    } else {
+        throw $_
+    }
+}
+
+Write-Host "Installing Winget..."
 $msixUrl = "https://github.com/microsoft/winget-cli/releases/download/v1.10.320/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
 $msixPath = "$env:TEMP\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
 Invoke-WebRequest -Uri $msixUrl -OutFile $msixPath
-Add-AppxPackage -Path $msixPath
+
+try {
+    Add-AppxPackage -Path $msixPath -ErrorAction Stop
+} catch {
+    if ($_.Exception.Message -match "0x80073D02") {
+        Write-Host "Microsoft.DesktopAppInstaller already installed, skipping."
+    } else {
+        throw $_
+    }
+}
 
 Write-Host "Checking if there is any winget update..."
 winget update winget --silent
@@ -32,7 +67,6 @@ winget install -e --id Microsoft.DotNet.AspNetCore.5 --source winget --silent
 winget install -e --id Microsoft.DotNet.AspNetCore.6 --source winget --silent
 winget install -e --id Microsoft.DotNet.AspNetCore.7 --source winget --silent
 winget install -e --id Microsoft.DotNet.AspNetCore.Preview --source winget --silent --silent
-winget install -e --id Microsoft.DotNet.AspNetCore.7 --source winget --silent
 
 # --- Install Redistributables via winget ---
 Write-Host "Installing redistributable packages via winget..."
@@ -54,7 +88,6 @@ Start-Process -FilePath $vjPath -Wait
 
 # SQL Server Compact Edition (SSCE) Runtime
 Write-Host "Downloading and installing SSCE Runtime..."
-$ssceUrl  = "https://download.microsoft.com/download/f/f/d/ffdf76e3-9e55-41da-a750-1798b971936c/ENU/SSCERuntime_x64-ENU.exe"
 $sscePath = "$env:TEMP\SSCERuntime_x64-ENU.exe"
 Invoke-WebRequest -Uri $ssceUrl -OutFile $sscePath
 Start-Process -FilePath $sscePath -Wait
