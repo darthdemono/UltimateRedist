@@ -1,31 +1,47 @@
 $progressPreference = 'silentlyContinue'
-# --- Install WinGet Module and Bootstrap ---
-Write-Host "Installing WinGet PowerShell module from PSGallery..."
-Install-PackageProvider -Name NuGet -Force | Out-Null
-Install-Module -Name Microsoft.WinGet.Client -Force -Repository PSGallery | Out-Null
-Write-Host "Using Repair-WinGetPackageManager cmdlet to bootstrap WinGet..."
-Repair-WinGetPackageManager
-Write-Host "Done." 
+
+# --- Installing Winget ---
+Write-Host "Installing Winget Dependencies..."
+$depUrl = "https://github.com/microsoft/winget-cli/releases/download/v1.10.320/DesktopAppInstaller_Dependencies.zip"
+$depZip = "$env:TEMP\DesktopAppInstaller_Dependencies.zip"
+Invoke-WebRequest -Uri $depUrl -OutFile $depZip
+$depFolder = "$env:TEMP\DesktopAppInstaller_Dependencies"
+Expand-Archive -Path $depZip -DestinationPath $depFolder -Force
+Write-Host "Installing Winget Dependencies..."
+$uiXaml = Join-Path $depFolder "x64\Microsoft.UI.Xaml.2.8_8.2501.31001.0_x64.appx"
+$vcLibs = Join-Path $depFolder "x64\Microsoft.VCLibs.140.00.UWPDesktop_14.0.33728.0_x64.appx"
+Add-AppxPackage -Path $uiXaml
+Add-AppxPackage -Path $vcLibs
+
+Write-Host "Instatlling Winget..."
+$msixUrl = "https://github.com/microsoft/winget-cli/releases/download/v1.10.320/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
+$msixPath = "$env:TEMP\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
+Invoke-WebRequest -Uri $msixUrl -OutFile $msixPath
+Add-AppxPackage -Path $msixPath
+
+Write-Host "Checking if there is any winget update..."
+winget update winget --silent
 
 # --- Install .NET Runtimes and SDKs ---
 Write-Host "Installing .NET components via winget..."
-winget install -e --id Microsoft.DotNet.Runtime.7 --source winget
-winget install -e --id Microsoft.DotNet.Runtime.6 --source winget
-winget install -e --id Microsoft.DotNet.Runtime.5 --source winget
-winget install -e --id Microsoft.DotNet.Runtime.Preview --source winget
-winget install -e --id Microsoft.DotNet.AspNetCore.Preview --source winget
-winget install -e --id Microsoft.DotNet.AspNetCore.7 --source winget
-winget install -e --id Microsoft.DotNet.AspNetCore.6 --source winget
-winget install -e --id Microsoft.DotNet.AspNetCore.5 --source winget --source winget
+winget install -e --id Microsoft.DotNet.Runtime.5 --source winget --silent
+winget install -e --id Microsoft.DotNet.Runtime.6 --source winget --silent
+winget install -e --id Microsoft.DotNet.Runtime.7 --source winget --silent
+winget install -e --id Microsoft.DotNet.Runtime.Preview --source winget --silent
+winget install -e --id Microsoft.DotNet.AspNetCore.5 --source winget --silent
+winget install -e --id Microsoft.DotNet.AspNetCore.6 --source winget --silent
+winget install -e --id Microsoft.DotNet.AspNetCore.7 --source winget --silent
+winget install -e --id Microsoft.DotNet.AspNetCore.Preview --source winget --silent --silent
+winget install -e --id Microsoft.DotNet.AspNetCore.7 --source winget --silent
 
 # --- Install Redistributables via winget ---
 Write-Host "Installing redistributable packages via winget..."
-winget install -e --id abbodi1406.vcredist --source winget
-winget install -e --id Microsoft.DirectX --source winget
-winget install -e --id Microsoft.XNARedist --source winget
-winget install -e --id Nvidia.PhysXLegacy --source winget
-winget install -e --id Nvidia.PhysX --source winget
-winget install -e --id Oracle.JavaRuntimeEnvironment --source winget
+winget install -e --id abbodi1406.vcredist --source winget --silent
+winget install -e --id Microsoft.DirectX --source winget --silent
+winget install -e --id Microsoft.XNARedist --source winget --silent
+winget install -e --id Nvidia.PhysXLegacy --source winget --silent
+winget install -e --id Nvidia.PhysX --source winget --silent
+winget install -e --id Oracle.JavaRuntimeEnvironment --source winget --silent
 
 # --- Manually Download & Execute Additional Setups ---
 
