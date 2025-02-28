@@ -1,6 +1,6 @@
-# UltimateRedistribution
+# UltimateRedist
 
-UltimateRedistribution is a PowerShell-based solution that automates the installation of essential redistributables and .NET runtimes using Winget. Designed for gaming and casual use, it streamlines the setup of a comprehensive collection of runtimes—so you never have to manually hunt down each component again.
+UltimateRedist is a PowerShell-based solution that automates the installation of essential redistributables and .NET runtimes using Winget. Designed for gaming and casual use, it streamlines the setup of a comprehensive collection of runtimes—so you never have to manually hunt down each component again.
 
 ---
 
@@ -57,9 +57,9 @@ UltimateRedistribution is a PowerShell-based solution that automates the install
 
 ---
 
-## Why UltimateRedistribution?
+## Why UltimateRedist?
 
-As a tech enthusiast, reinstalling Windows often means rebuilding your development and gaming environment from scratch. Keeping track of and updating every individual redistributable—from VC++ runtimes and .NET to DirectX, XNA, and beyond—can be a hassle. UltimateRedistribution simplifies this process by automating the installation of every required component through Winget, so you can focus on what matters.
+As a tech enthusiast, reinstalling Windows often means rebuilding your development and gaming environment from scratch. Keeping track of and updating every individual redistributable—from VC++ runtimes and .NET to DirectX, XNA, and beyond—can be a hassle. UltimateRedist simplifies this process by automating the installation of every required component through Winget, so you can focus on what matters.
 
 ### Why Install Winget?
 Winget is an excellent package manager that streamlines software installation. However, the traditional method of installing Winget is bugged, which is why this project employs a workaround to install Winget dependencies and the package manager itself.
@@ -71,7 +71,7 @@ This project aims to cover every essential runtime without the need to manually 
 
 ## Special Thanks
 
-- **abbodi1406:** Thanks to his VCredist AIO project, I didn’t have to manually add every Visual C++ redistributable. His work has been instrumental in making UltimateRedistribution universal for all Windows runtimes.
+- **abbodi1406:** Thanks to his VCredist AIO project, I didn’t have to manually add every Visual C++ redistributable. His work has been instrumental in making UltimateRedist universal for all Windows runtimes.
 
 ---
 
@@ -97,13 +97,13 @@ This project aims to cover every essential runtime without the need to manually 
    ```powershell
    irm "https://raw.githubusercontent.com/darthdemono/UltimateRedist/main/script.ps1" | iex
    ```
-   - This command will download and execute the UltimateRedistribution script directly from GitHub.
+   - This command will download and execute the UltimateRedist script directly from GitHub.
 
 ---
 
 ## Compatibility
 
-UltimateRedistribution supports both **x64** and **x86** systems and is designed to install all necessary redistributables and runtimes for a comprehensive gaming and casual usage setup.
+UltimateRedist supports both **x64** and **x86** systems and is designed to install all necessary redistributables and runtimes for a comprehensive gaming and casual usage setup.
 
 ---
 ## License
