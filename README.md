@@ -95,7 +95,7 @@ This project aims to cover every essential runtime without the need to manually 
 3. **Run the Script:**
    Copy and paste the following command into your elevated terminal:
    ```powershell
-   irm "https://raw.githubusercontent.com/darthdemono/UltimateRedist/main/script.ps1" | iex
+   irm "https://raw.githubusercontent.com/darthdemono/UltimateRedist/main/UltimateRedist.ps1" | iex
    ```
    - This command will download and execute the UltimateRedist script directly from GitHub.
 
