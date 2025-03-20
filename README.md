@@ -2,6 +2,7 @@
 
 UltimateRedist is a PowerShell-based solution that automates the installation of essential redistributables and .NET runtimes using Winget. Designed for gaming and casual use, it streamlines the setup of a comprehensive collection of runtimes—so you never have to manually hunt down each component again.
 
+It transforms a 2-hour manual process into a fully automated setup completed in 5–10 minutes—reducing installation time by approximately 91%. This ensures over 98% installation consistency and virtually eliminates manual errors.
 ---
 
 ## Features
@@ -16,6 +17,8 @@ UltimateRedist is a PowerShell-based solution that automates the installation of
   - Visual J# Redistributable
   - SQL Server Compact Edition (SSCE) Runtime
   - OpenAL
+  - NDI 5
+  - Microsoft Edge WebView2
 - **Universal Compatibility:** Works on both x64 and x86 systems.
 - **Winget Integration:** Installs Winget using a workaround to overcome the default installation issues.
 
@@ -40,10 +43,17 @@ Package of Microsoft C and C++ runtime libraries required for applications built
 ### .NET and ASP.NET Runtimes/SDKs
 Framework and web libraries needed to run .NET and ASP.NET applications.
 
+- **.NET 3.1**
 - **.NET 5**
 - **.NET 6**
 - **.NET 7**
 - **.NET Preview**
+- **.NET 3.1 Desktop**
+- **.NET 5 Desktop**
+- **.NET 6 Desktop**
+- **.NET 7 Desktop**
+- **.NET Preview Desktop**
+- **ASP.NET 3.1**
 - **ASP.NET 5**
 - **ASP.NET 6**
 - **ASP.NET 7**
@@ -67,7 +77,10 @@ Runtime components for running applications developed with Visual J#, targeting 
 Lightweight, embedded database engine for local data storage in legacy and small-scale applications.
 #### OpenAL
 Cross-platform audio API for rendering multichannel 3D audio.
-
+#### NDI 5 Runtime
+Bring the NDI support for specific application that requirs NDI libraries but do not bundle them with their installer.
+#### Microsoft Edge WebView2 Runtime
+Embed web content (HTML, CSS, and JavaScript) in your native applications with Microsoft Edge WebView2. ()
 ---
 
 ## Why UltimateRedist?

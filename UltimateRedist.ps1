@@ -68,10 +68,17 @@ winget update winget --silent
 
 # --- Install .NET Runtimes and SDKs ---
 Write-Host "Installing .NET components via Winget..."
+winget install -e --id Microsoft.DotNet.Runtime.3_1 --source winget --silent
 winget install -e --id Microsoft.DotNet.Runtime.5 --source winget --silent
 winget install -e --id Microsoft.DotNet.Runtime.6 --source winget --silent
 winget install -e --id Microsoft.DotNet.Runtime.7 --source winget --silent
 winget install -e --id Microsoft.DotNet.Runtime.Preview --source winget --silent
+winget install -e --id Microsoft.DotNet.DesktopRuntime.3_1 --source winget --silent
+winget install -e --id Microsoft.DotNet.DesktopRuntime.5 --source winget --silent
+winget install -e --id Microsoft.DotNet.DesktopRuntime.6 --source winget --silent
+winget install -e --id Microsoft.DotNet.DesktopRuntime.7 --source winget --silent
+winget install -e --id Microsoft.DotNet.DesktopRuntime.Preview --source winget --silent
+winget install -e --id Microsoft.DotNet.AspNetCore.3_1 --source winget --silent
 winget install -e --id Microsoft.DotNet.AspNetCore.5 --source winget --silent
 winget install -e --id Microsoft.DotNet.AspNetCore.6 --source winget --silent
 winget install -e --id Microsoft.DotNet.AspNetCore.7 --source winget --silent
@@ -85,6 +92,8 @@ winget install -e --id Microsoft.XNARedist --source winget --silent
 winget install -e --id Nvidia.PhysXLegacy --source winget --silent
 winget install -e --id Nvidia.PhysX --source winget --silent
 winget install -e --id Oracle.JavaRuntimeEnvironment --source winget --silent
+winget install -e --id NewTek.NDI5Runtime --source winget --silent
+winget install -e --id Microsoft.EdgeWebView2Runtime --source winget --silent
 
 # --- Manually Download & Execute Additional Setups ---
 
