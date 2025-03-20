@@ -3,6 +3,7 @@
 UltimateRedist is a PowerShell-based solution that automates the installation of essential redistributables and .NET runtimes using Winget. Designed for gaming and casual use, it streamlines the setup of a comprehensive collection of runtimes—so you never have to manually hunt down each component again.
 
 It transforms a 2-hour manual process into a fully automated setup completed in 5–10 minutes—reducing installation time by approximately 91%. This ensures over 98% installation consistency and virtually eliminates manual errors.
+
 ---
 
 ## Features
