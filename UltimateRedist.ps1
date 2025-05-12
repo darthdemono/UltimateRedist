@@ -94,6 +94,7 @@ winget install -e --id Nvidia.PhysX --source winget --silent
 winget install -e --id Oracle.JavaRuntimeEnvironment --source winget --silent
 winget install -e --id NewTek.NDI5Runtime --source winget --silent
 winget install -e --id Microsoft.EdgeWebView2Runtime --source winget --silent
+winget install -e --id OpenAL.OpenAL --source winget --silent
 
 # --- Manually Download & Execute Additional Setups ---
 
@@ -109,15 +110,5 @@ Write-Host "Downloading and installing SSCE Runtime..."
 $sscePath = "$env:TEMP\SSCERuntime_x64-ENU.exe"
 Invoke-WebRequest -Uri $ssceUrl -OutFile $sscePath
 Start-Process -FilePath $sscePath -Wait
-
-# OpenAL Installer
-Write-Host "Downloading and installing OpenAL..."
-$oalUrl = "https://www.openal.org/downloads/oalinst.zip"
-$oalZip = "$env:TEMP\oalinst.zip"
-$oalFolder = "$env:TEMP\oalinst"
-Invoke-WebRequest -Uri $oalUrl -OutFile $oalZip
-Expand-Archive -Path $oalZip -DestinationPath $oalFolder -Force
-$oalExe = Join-Path $oalFolder "oalinst.exe"
-Start-Process -FilePath $oalExe -Wait
 
 Write-Host "All installations complete."
